@@ -11,7 +11,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(InGame.class)
 public class InGameMixin {
     @Inject(method = "setWorld(Lfinalforeach/cosmicreach/world/World;)V", at = @At("HEAD"))
-    private void injected(World world, CallbackInfo ci) {
+    private void setTitleFromWorldName(World world, CallbackInfo ci) {
         Gdx.graphics.setTitle(world.getDisplayName());
+    }
+
+    @Inject(method = "unloadWorld()V", at = @At("HEAD"))
+    private void setCosmicReachTitle(CallbackInfo ci) {
+        Gdx.graphics.setTitle("Cosmic Reach");
     }
 }
